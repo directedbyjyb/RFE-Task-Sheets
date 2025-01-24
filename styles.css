@@ -139,8 +139,8 @@ iframe {
 
 #dateDisplay {
     text-align: center;
-    margin: 20px auto; /* Centered horizontally and with space above/below */
-    font-size: 1.4em;
+    margin: 20px 20px; /* Centered horizontally and with space above/below */
+    font-size: 1.1em;
     font-weight: bold;
     color: #007bff; /* Primary color */
     background-color: #f4f4f9; /* Subtle background */
