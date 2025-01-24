@@ -227,3 +227,98 @@ body.menu-open::before {
 #menuItems.open {
     display: block; /* Show menu when toggled */
 }
+/* Footer Styling */
+#pageFooter {
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f9; /* Light background */
+    color: #333; /* Text color */
+    font-size: 0.9em;
+    border-top: 1px solid #ccc; /* Optional border */
+}
+
+/* Help Button Styling */
+#helpButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#helpButton:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    text-align: left;
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.modal-content p, ul {
+    font-size: 0.9em;
+    color: #333;
+}
+
+.modal-content ul li {
+    margin-bottom: 10px;
+}
+
+/* Close Button Styling */
+.modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-content .close:hover {
+    color: #007bff;
+}
+
+/* Emoji Styling */
+#emojiContainer {
+    font-size: 1.5em; /* Slightly smaller emoji to align with header size */
+    vertical-align: middle; /* Align emoji with the header text */
+    margin-left: 5px; /* Add some space between emoji and header text */
+    animation: emojiChange 1s infinite; /* Smooth emoji change animation */
+    transition: transform 0.2s ease;
+}
+
+/* Optional: Slight bounce effect on emoji hover */
+#emojiContainer:hover {
+    transform: scale(1.2); /* Enlarges slightly on hover */
+}
