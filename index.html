@@ -77,6 +77,29 @@
         </div>
     </div>
 
+    <!-- Footer Section -->
+<footer id="pageFooter">
+    <button id="helpButton" onclick="toggleHelp()">Help</button>
+</footer>
+
+<!-- Help Modal -->
+<div id="helpModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="toggleHelp()">&times;</span>
+        <h2 style="display: inline-block; margin-right: 10px;">Navigation Help</h2>
+        <!-- Emoji Container -->
+        <span id="emojiContainer" style="display: inline-block; font-size: 1.5em;">😎</span>
+        
+        <p>Welcome to the RFE Shift Task Viewer! Here's how to navigate:</p>
+        <ul>
+            <li>Click on the collapsible tabs to expand the documents.</li>
+            <li>Use the <strong>Hamburger Menu</strong> in the top-right corner for additional options such as submitting feedback regarding task sheets.</li>
+            <li>Click "Go Back to Selection" to modify your shift selection.</li>
+        </ul>
+        <p>If you have any questions, feel free to contact the admin team.</p>
+      <p>This application has been developed by RFEs as an open-source application. To contribute to the codebase or offer suggestions, please access the code repository by selecting 'View Page Source'.</p>
+    </div>
+</div>
     <!-- Link to external script -->
     <script src="script.js"></script>
     <script src="taskDocs.js"></script>
