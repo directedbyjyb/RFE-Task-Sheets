@@ -117,3 +117,34 @@ function displayDate() {
 
 // Call the function to display the date on page load
 displayDate();
+
+// Function to toggle the Help Modal
+function toggleHelp() {
+    const modal = document.getElementById('helpModal');
+    const isVisible = modal.style.display === 'flex';
+    modal.style.display = isVisible ? 'none' : 'flex';
+
+    // Start changing emojis when the modal is opened
+    if (!isVisible) startEmojiChange();
+}
+
+// Function to change emojis in the modal
+function startEmojiChange() {
+    const emojiContainer = document.getElementById('emojiContainer');
+    const emojis = ['😎', '😊', '🤓', '🙌', '🎉', '👍', '💡', '✨']; // List of fun emojis
+    let index = 0;
+
+    // Clear any existing interval to avoid duplication
+    if (window.emojiInterval) clearInterval(window.emojiInterval);
+
+    // Start an interval to cycle through emojis
+    window.emojiInterval = setInterval(() => {
+        emojiContainer.innerText = emojis[index];
+        index = (index + 1) % emojis.length; // Loop back to the start
+    }, 1000); // Change every 1 second
+}
+
+// Stop changing emojis when the modal is closed
+function stopEmojiChange() {
+    if (window.emojiInterval) clearInterval(window.emojiInterval);
+}
