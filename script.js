@@ -100,23 +100,47 @@ function loadTaskDocs() {
     document.getElementById('documentView').style.display = 'block';
 }
 
-// Function to display the current date and day
-function displayDate() {
+function displayDateAndShift() {
     const dateContainer = document.getElementById('dateDisplay');
+    const shiftContainer = document.getElementById('shiftDisplay');
 
-    // Get the current date
-    const today = new Date();
+    // Get the current date and time
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
 
     // Format the date: e.g., "January 23, 2025"
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = today.toLocaleDateString('en-US', options);
+    const formattedDate = now.toLocaleDateString('en-US', options);
 
-    // Set the date in the container
+    // Determine the ongoing shift
+    let ongoingShift = "No Shift"; // Default if time doesn't match any shift
+    if (hours >= 6 && (hours < 10 || (hours === 10 && minutes <= 45))) {
+        ongoingShift = "Opening";
+    } else if (
+        (hours === 11 || hours < 15) ||
+        (hours === 10 && minutes > 45)
+    ) {
+        ongoingShift = "Mid-Morning";
+    } else if (
+        (hours === 15 || hours < 19) ||
+        (hours === 14 && minutes > 45)
+    ) {
+        ongoingShift = "Afternoon";
+    } else if (hours >= 19 && hours <= 23) {
+        ongoingShift = "Closing";
+    }
+
+    // Update the date and shift displays
     dateContainer.innerText = `Today is: ${formattedDate}`;
+    shiftContainer.innerText = `Ongoing Shift: ${ongoingShift}`;
+  setInterval(displayDateAndShift, 60000); // Refresh every 60 seconds
+
 }
 
-// Call the function to display the date on page load
-displayDate();
+
+// Call the function to display the date and shift on page load
+displayDateAndShift();
 
 // Function to toggle the Help Modal
 function toggleHelp() {
