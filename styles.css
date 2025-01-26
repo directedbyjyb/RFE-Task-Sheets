@@ -135,19 +135,22 @@ iframe {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* ========== Date Display Styling ========== */
+/* ========== Date Display and Shift Display Styling ========== */
 
-#dateDisplay {
-    text-align: center;
-    margin: 20px 20px; /* Centered horizontally and with space above/below */
+#infoContainer {
+    text-align: left;
+}
+
+#dateDisplay, #shiftDisplay {
+    display: inline-block; /* Inline for alignment */
+    margin: 20px 20px; /* Add spacing between the two elements */
     font-size: 1.0em;
     font-weight: bold;
-    color: #007bff; /* Primary color */
+    color: #4EC03F; /* Primary color */
     background-color: #f4f4f9; /* Subtle background */
     padding: 10px 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: inline-block; /* Makes the box fit the content and center-align */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ========== Hamburger Menu ========== */
