@@ -140,7 +140,7 @@ button:hover {
     margin-top: 20px;
     display: flex;
     flex-direction: column; /* Stack vertically */
-    gap: 20px; /* Space between stacked iframes */
+    gap: 15px; /* Space between stacked iframes */
 }
 
 iframe {
