@@ -51,14 +51,22 @@ function loadTaskDocs() {
     taskDocs.forEach((docURL, index) => {
         const button = document.createElement('button');
         button.className = 'collapsible';
-        button.innerText = docNames[index];
+        button.innerHTML = `${docNames[index]} <span class="indicator">▼</span>`; // Add the indicator span
         button.onclick = function () {
             this.classList.toggle('active');
+            const indicator = this.querySelector('.indicator'); // Find the indicator
             const content = this.nextElementSibling;
-            if (content.style.display === 'block') {
-                content.style.display = 'none';
+
+            if (content.classList.contains('expanded')) {
+                // Collapse content
+                content.style.maxHeight = null;
+                content.classList.remove('expanded');
+                indicator.style.transform = 'rotate(0deg)'; // Reset indicator
             } else {
-                content.style.display = 'block';
+                // Expand content
+                content.style.maxHeight = content.scrollHeight + "px"; // Dynamically set maxHeight
+                content.classList.add('expanded');
+                indicator.style.transform = 'rotate(180deg)'; // Rotate indicator
             }
         };
 
@@ -75,14 +83,22 @@ function loadTaskDocs() {
     // Add a static "Special Tasks" button
     const specialTaskButton = document.createElement('button');
     specialTaskButton.className = 'collapsible';
-    specialTaskButton.innerText = 'Special Tasks';
+    specialTaskButton.innerHTML = `Special Tasks <span class="indicator">▼</span>`;
     specialTaskButton.onclick = function () {
         this.classList.toggle('active');
+        const indicator = this.querySelector('.indicator'); // Find the indicator
         const content = this.nextElementSibling;
-        if (content.style.display === 'block') {
-            content.style.display = 'none';
+
+        if (content.classList.contains('expanded')) {
+            // Collapse content
+            content.style.maxHeight = null;
+            content.classList.remove('expanded');
+            indicator.style.transform = 'rotate(0deg)'; // Reset indicator
         } else {
-            content.style.display = 'block';
+            // Expand content
+            content.style.maxHeight = content.scrollHeight + "px"; // Dynamically set maxHeight
+            content.classList.add('expanded');
+            indicator.style.transform = 'rotate(180deg)'; // Rotate indicator
         }
     };
 
@@ -100,6 +116,7 @@ function loadTaskDocs() {
     document.getElementById('documentView').style.display = 'block';
 }
 
+// Function to display date and shift
 function displayDateAndShift() {
     const dateContainer = document.getElementById('dateDisplay');
     const shiftContainer = document.getElementById('shiftDisplay');
