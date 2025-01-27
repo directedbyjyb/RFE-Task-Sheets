@@ -101,6 +101,9 @@ button:hover {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between text and indicator */
 }
 
 .collapsible:hover {
@@ -108,14 +111,27 @@ button:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
+.collapsible .indicator {
+    transition: transform 0.3s ease; /* Smooth rotation for the indicator */
+}
+
+.collapsible.active .indicator {
+    transform: rotate(180deg); /* Rotate when content is expanded */
+}
+
 .content {
-    padding: 10px 18px;
-    display: none;
     overflow: hidden;
+    max-height: 0; /* Start hidden */
+    transition: max-height 0.5s ease, padding 0.5s ease; /* Smooth open/close */
     background-color: #f9f9f9;
     border-radius: 8px;
     margin-top: 10px;
+    padding: 0 18px; /* Padding collapses when hidden */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content.expanded {
+    padding: 10px 18px; /* Restore padding when expanded */
 }
 
 /* ========== Iframe Container ========== */
