@@ -42,8 +42,7 @@ function showSelection() {
     document.body.classList.remove('menu-open');
 }
 
-// Function to handle selection and load Google Docs
-// Show hamburger menu after task selection
+// Function to handle shift selection and load Google Docs
 function loadTaskDocs() {
     const location = document.getElementById('location').value;
     const day = document.getElementById('day').value;
@@ -52,10 +51,12 @@ function loadTaskDocs() {
     const taskDocs = getTaskDocsURLs(location, day, shift);
     document.getElementById('taskDocContainer').innerHTML = '';
 
+    // Create collapsible sections for each task doc
+    const docNames = ["Task Sheets", "Photo Initiative", "GF + LT"];
     taskDocs.forEach((docURL, index) => {
         const button = document.createElement('button');
         button.className = 'collapsible';
-        button.innerHTML = `${["Task Sheets", "Photo Initiative", "GF + LT"][index]} <span class="indicator">▼</span>`;
+        button.innerHTML = `${docNames[index]} <span class="indicator">▼</span>`;
         button.onclick = function () {
             this.classList.toggle('active');
             const indicator = this.querySelector('.indicator');
@@ -80,6 +81,34 @@ function loadTaskDocs() {
         document.getElementById('taskDocContainer').appendChild(button);
         document.getElementById('taskDocContainer').appendChild(content);
     });
+
+    // Add a static "Special Tasks" button
+    const specialTaskButton = document.createElement('button');
+    specialTaskButton.className = 'collapsible';
+    specialTaskButton.innerHTML = `Special Tasks <span class="indicator">▼</span>`;
+    specialTaskButton.onclick = function () {
+        this.classList.toggle('active');
+        const indicator = this.querySelector('.indicator');
+        const content = this.nextElementSibling;
+        if (content.classList.contains('expanded')) {
+            content.style.maxHeight = null;
+            content.classList.remove('expanded');
+            indicator.style.transform = 'rotate(0deg)';
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+            content.classList.add('expanded');
+            indicator.style.transform = 'rotate(180deg)';
+        }
+    };
+
+    const specialTaskContent = document.createElement('div');
+    specialTaskContent.className = 'content';
+    const specialIframe = document.createElement('iframe');
+    specialIframe.src = 'https://example.com/special-tasks-doc'; // Replace with your actual URL
+    specialTaskContent.appendChild(specialIframe);
+
+    document.getElementById('taskDocContainer').appendChild(specialTaskButton);
+    document.getElementById('taskDocContainer').appendChild(specialTaskContent);
 
     // Show task view, hide selection view
     document.getElementById('selectionView').style.display = 'none';
