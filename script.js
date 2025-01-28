@@ -12,12 +12,17 @@ function toggleMenu() {
     }
 }
 
+// Hide the hamburger menu on page load
+window.onload = function () {
+    document.getElementById('hamburgerMenu').style.display = 'none';
+};
+
 // Function to open a Google Form in a new tab
 function openGoogleForm(url) {
     window.open(url, '_blank'); // Open the form URL in a new tab
 }
 
-// Function to show the selection view again
+// Function to show the selection view again and hide the menu
 function showSelection() {
     // Reset selections to default
     document.getElementById('location').value = 'RAC';
@@ -28,45 +33,41 @@ function showSelection() {
     document.getElementById('selectionView').style.display = 'block';
     document.getElementById('documentView').style.display = 'none';
 
-    // Hide the hamburger menu items and remove blur effect
+    // Hide the hamburger menu when returning to selection
+    document.getElementById('hamburgerMenu').style.display = 'none';
+
+    // Hide menu items and remove blur effect if open
     const menu = document.getElementById('menuItems');
     menu.classList.remove('open');
     document.body.classList.remove('menu-open');
 }
 
 // Function to handle selection and load Google Docs
+// Show hamburger menu after task selection
 function loadTaskDocs() {
     const location = document.getElementById('location').value;
     const day = document.getElementById('day').value;
     const shift = document.getElementById('shift').value;
 
-    // Map the location, day, and shift to the correct Google Docs URLs
     const taskDocs = getTaskDocsURLs(location, day, shift);
-
-    // Clear any previous task docs before adding new ones
     document.getElementById('taskDocContainer').innerHTML = '';
 
-    // Create collapsible sections for each of the task docs
-    const docNames = ["Task Sheets", "Photo Initiative", "GF + LT"];
     taskDocs.forEach((docURL, index) => {
         const button = document.createElement('button');
         button.className = 'collapsible';
-        button.innerHTML = `${docNames[index]} <span class="indicator">▼</span>`; // Add the indicator span
+        button.innerHTML = `${["Task Sheets", "Photo Initiative", "GF + LT"][index]} <span class="indicator">▼</span>`;
         button.onclick = function () {
             this.classList.toggle('active');
-            const indicator = this.querySelector('.indicator'); // Find the indicator
+            const indicator = this.querySelector('.indicator');
             const content = this.nextElementSibling;
-
             if (content.classList.contains('expanded')) {
-                // Collapse content
                 content.style.maxHeight = null;
                 content.classList.remove('expanded');
-                indicator.style.transform = 'rotate(0deg)'; // Reset indicator
+                indicator.style.transform = 'rotate(0deg)';
             } else {
-                // Expand content
-                content.style.maxHeight = content.scrollHeight + "px"; // Dynamically set maxHeight
+                content.style.maxHeight = content.scrollHeight + "px";
                 content.classList.add('expanded');
-                indicator.style.transform = 'rotate(180deg)'; // Rotate indicator
+                indicator.style.transform = 'rotate(180deg)';
             }
         };
 
@@ -80,40 +81,12 @@ function loadTaskDocs() {
         document.getElementById('taskDocContainer').appendChild(content);
     });
 
-    // Add a static "Special Tasks" button
-    const specialTaskButton = document.createElement('button');
-    specialTaskButton.className = 'collapsible';
-    specialTaskButton.innerHTML = `Special Tasks <span class="indicator">▼</span>`;
-    specialTaskButton.onclick = function () {
-        this.classList.toggle('active');
-        const indicator = this.querySelector('.indicator'); // Find the indicator
-        const content = this.nextElementSibling;
-
-        if (content.classList.contains('expanded')) {
-            // Collapse content
-            content.style.maxHeight = null;
-            content.classList.remove('expanded');
-            indicator.style.transform = 'rotate(0deg)'; // Reset indicator
-        } else {
-            // Expand content
-            content.style.maxHeight = content.scrollHeight + "px"; // Dynamically set maxHeight
-            content.classList.add('expanded');
-            indicator.style.transform = 'rotate(180deg)'; // Rotate indicator
-        }
-    };
-
-    const specialTaskContent = document.createElement('div');
-    specialTaskContent.className = 'content';
-    const specialIframe = document.createElement('iframe');
-    specialIframe.src = 'https://example.com/special-tasks-doc'; // Replace with your actual URL
-    specialTaskContent.appendChild(specialIframe);
-
-    document.getElementById('taskDocContainer').appendChild(specialTaskButton);
-    document.getElementById('taskDocContainer').appendChild(specialTaskContent);
-
-    // Hide the selection view and show the document view
+    // Show task view, hide selection view
     document.getElementById('selectionView').style.display = 'none';
     document.getElementById('documentView').style.display = 'block';
+
+    // Show the hamburger menu after task selection
+    document.getElementById('hamburgerMenu').style.display = 'block';
 }
 
 // Function to display date and shift
@@ -149,12 +122,11 @@ function displayDateAndShift() {
     }
 
     // Update the date and shift displays
-    dateContainer.innerText = `Today is: ${formattedDate}`;
+    dateContainer.innerText = `Date: ${formattedDate}`;
     shiftContainer.innerText = `Ongoing Shift: ${ongoingShift}`;
   setInterval(displayDateAndShift, 60000); // Refresh every 60 seconds
 
 }
-
 
 // Call the function to display the date and shift on page load
 displayDateAndShift();
