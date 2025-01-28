@@ -1,14 +1,20 @@
 // Function to toggle the hamburger menu visibility
+// Function to toggle the hamburger menu visibility with smooth transitions
 function toggleMenu() {
     const menu = document.getElementById('menuItems');
     const body = document.body;
 
-    menu.classList.toggle('open'); // Toggle the "open" class to show/hide the menu
-
+    // Slide in and out the menu with a smooth transition
     if (menu.classList.contains('open')) {
-        body.classList.add('menu-open'); // Add the blur effect
+        menu.style.transform = 'translateX(100%)';
+        menu.style.opacity = '0';
+        menu.classList.remove('open');
+        body.classList.remove('menu-open'); // Remove blur effect
     } else {
-        body.classList.remove('menu-open'); // Remove the blur effect
+        menu.style.transform = 'translateX(0)';
+        menu.style.opacity = '1';
+        menu.classList.add('open');
+        body.classList.add('menu-open'); // Add blur effect
     }
 }
 
