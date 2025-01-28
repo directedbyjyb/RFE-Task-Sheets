@@ -195,16 +195,27 @@ iframe {
 
 /* Hamburger menu dropdown */
 #menuItems {
-    display: none; /* Initially hidden */
+    display: block;
     position: absolute;
-    top: 50px; /* Positioned below the hamburger icon */
-    right: 0;
+    top: 55px;
+    right: -220px; /* Initially hidden off-screen */
+    width: 200px;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    padding: 10px 0; /* Space around the dropdown */
-    z-index: 1100; /* Higher than the blur effect */
+    padding: 10px 0;
+    z-index: 1100;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Show menu with slide-in and fade effect */
+#menuItems.open {
+    opacity: 1;
+    transform: translateX(0);
+    right: 0px;
 }
 
 /* Menu buttons */
